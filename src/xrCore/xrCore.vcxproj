@@ -548,7 +548,7 @@ if not exist "$(OutDir)tbbmalloc_proxy.dll" copy /y "$(xrSdkDir)binaries\$(Platf
       <Project>{7885cf3c-ee04-4c67-9467-1fbf9a36b037}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Externals\mimalloc\ide\vs2017\mimalloc.vcxproj" Condition="'$(xrUseVS2017)'=='true'">
-      <Project>{bf493aa1-36a2-44fb-bd80-6ba7a6bf85d2}</Project>
+      <Project>{abb5eae7-b3e6-432e-b636-333449892ea6}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Externals\mimalloc\ide\vs2019\mimalloc.vcxproj" Condition="'$(xrUseVS2017)'!='true'">
       <Project>{abb5eae7-b3e6-432e-b636-333449892ea6}</Project>
