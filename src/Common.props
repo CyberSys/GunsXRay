@@ -39,8 +39,16 @@
   </PropertyGroup>
 
   <PropertyGroup Label="UserMacros">
+    <xrUseVS2017>false</xrUseVS2017>
+	<xrUseVS2017 Condition="$(VisualStudioVersion.StartsWith('15.'))">true</xrUseVS2017>
+  </PropertyGroup>
+
+  <PropertyGroup Label="UserMacros">
     <!-- Default is 10.0 (latest) -->
     <xrTargetPlatform>10.0</xrTargetPlatform>
+
+	<!-- VS2017 doesn't understand the previous line -->
+    <xrTargetPlatform Condition="'$(xrUseVS2017)'=='true'">8.1</xrTargetPlatform>
 
     <!-- 8.1 is allowed -->
     <xrTargetPlatform Condition="'$(WindowsTargetPlatformVersion)'=='8.1'">8.1</xrTargetPlatform>
@@ -55,8 +63,16 @@
     <!-- Default is v142 -->
     <xrPlatformToolset>v142</xrPlatformToolset>
 
+	<!-- VS2017 has no v142, use v141 as default -->
+	<xrPlatformToolset Condition="'$(xrUseVS2017)'=='true'">v141</xrPlatformToolset>
+
     <!-- v141 is allowed -->
     <xrPlatformToolset Condition="'$(DefaultPlatformToolset)'=='v141'">v141</xrPlatformToolset>
+  </PropertyGroup>
+
+  <PropertyGroup Label="UserMacros">
+    <xrUseConformance>true</xrUseConformance>
+    <xrUseConformance Condition="'$(xrPlatformToolset)'=='v141'">false</xrUseConformance>
   </PropertyGroup>
 
   <PropertyGroup Label="UserMacros">
@@ -82,7 +98,7 @@
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <UseDebugLibraries>true</UseDebugLibraries>
     <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup> 
+  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Mixed' Or '$(Configuration)'=='Release'">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -105,7 +121,7 @@
       </AdditionalIncludeDirectories>
       <!--
         4251 : class 'x' needs to have dll-interface to be used by clients of class 'y'
-        4275 : non dll-interface class 'x' used as base for dll-interface class 'y' 
+        4275 : non dll-interface class 'x' used as base for dll-interface class 'y'
         4458 : declaration of 'x' hides class member
         -->
       <DisableSpecificWarnings>4251;4275;4458</DisableSpecificWarnings>
@@ -154,7 +170,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
-    
+
     <Link>
       <AdditionalLibraryDirectories>
         $(xrSdkDir)libraries;
