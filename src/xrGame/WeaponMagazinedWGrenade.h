@@ -89,4 +89,8 @@ public:
     u8 iAmmoElapsed2;
 
     virtual void UpdateGrenadeVisibility(bool visibility);
+
+public:
+    // GUNSLINGER Mod
+    bool Gunsl_GetGrenadeMode() { return m_bGrenadeMode; }
 };

@@ -953,6 +953,11 @@
     <ClInclude Include="group_hierarchy_holder.h" />
     <ClInclude Include="group_hierarchy_holder_inline.h" />
     <ClInclude Include="gsc_dsigned_ltx.h" />
+    <ClInclude Include="gunslinger_mod\ActorUtils.h" />
+    <ClInclude Include="gunslinger_mod\collimator.h" />
+    <ClInclude Include="gunslinger_mod\gunsl_config.h" />
+    <ClInclude Include="gunslinger_mod\HudItemUtils.h" />
+    <ClInclude Include="gunslinger_mod\UiUtils.h" />
     <ClInclude Include="HairsZone.h" />
     <ClInclude Include="HangingLamp.h" />
     <ClInclude Include="harvest_time.h" />
@@ -2547,6 +2552,11 @@
     <ClCompile Include="GrenadeLauncher.cpp" />
     <ClCompile Include="group_hierarchy_holder.cpp" />
     <ClCompile Include="gsc_dsigned_ltx.cpp" />
+    <ClCompile Include="gunslinger_mod\ActorUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\collimator.cpp" />
+    <ClCompile Include="gunslinger_mod\gunsl_config.cpp" />
+    <ClCompile Include="gunslinger_mod\HudItemUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\UiUtils.cpp" />
     <ClCompile Include="HairsZone.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>

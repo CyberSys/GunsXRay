@@ -2254,6 +2254,9 @@
     <Filter Include="UI\Multiplayer\MM_MP\VersionList">
       <UniqueIdentifier>{04c90fd3-e247-4f21-b715-8dc556986837}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GunslingerMod">
+      <UniqueIdentifier>{b169e04d-c0d4-4a69-a75d-5813c7141ade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mt_config.h">
@@ -6504,6 +6507,21 @@
     <ClInclude Include="ui\UIArtefactPanel.h">
       <Filter>UI\Common\MainIngame</Filter>
     </ClInclude>
+    <ClInclude Include="gunslinger_mod\ActorUtils.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\UiUtils.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\collimator.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\HudItemUtils.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\gunsl_config.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9874,6 +9892,21 @@
     </ClCompile>
     <ClCompile Include="ui\UIArtefactPanel.cpp">
       <Filter>UI\Common\MainIngame</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\ActorUtils.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\UiUtils.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\collimator.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\HudItemUtils.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\gunsl_config.cpp">
+      <Filter>GunslingerMod</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

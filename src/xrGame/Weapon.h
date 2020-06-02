@@ -126,6 +126,7 @@ public:
     BOOL AutoSpawnAmmo() const { return m_bAutoSpawnAmmo; };
     bool IsTriStateReload() const { return m_bTriStateReload; }
     EWeaponSubStates GetReloadState() const { return (EWeaponSubStates)m_sub_state; }
+
 protected:
     bool m_bTriStateReload;
 
@@ -212,7 +213,6 @@ protected:
         shared_str m_sUseBinocularVision;
         CBinocularsVision* m_pVision;
         CNightVisionEffector* m_pNight_vision;
-
     } m_zoom_params;
 
     float m_fRTZoomFactor; // run-time zoom factor
@@ -241,11 +241,13 @@ public:
 public:
     virtual EHandDependence HandDependence() const { return eHandDependence; }
     bool IsSingleHanded() const { return m_bIsSingleHanded; }
+
 public:
     IC LPCSTR strap_bone0() const { return m_strap_bone0; }
     IC LPCSTR strap_bone1() const { return m_strap_bone1; }
     IC void strapped_mode(bool value) { m_strapped_mode = value; }
     IC bool strapped_mode() const { return m_strapped_mode; }
+
 protected:
     LPCSTR m_strap_bone0;
     LPCSTR m_strap_bone1;
@@ -370,6 +372,7 @@ protected:
 public:
     float GetMisfireStartCondition() const { return misfireStartCondition; };
     float GetMisfireEndCondition() const { return misfireEndCondition; };
+
 protected:
     struct SPDM
     {
@@ -425,6 +428,7 @@ public:
     virtual float Get_PDM_Crouch_NA() const { return m_pdm.m_fPDM_disp_crouch_no_acc; };
     virtual float GetCrosshairInertion() const { return m_crosshair_inertion; };
     float GetFirstBulletDisp() const { return m_first_bullet_controller.get_fire_dispertion(); };
+
 protected:
     int iAmmoElapsed; // ammo in magazine, currently
     int iMagazineSize; // size (in bullets) of magazine
@@ -479,7 +483,7 @@ public:
     virtual u32 ef_main_weapon_type() const;
     virtual u32 ef_weapon_type() const;
 
-    //Alundaio
+    // Alundaio
     int GetAmmoCount_forType(shared_str const& ammo_type) const;
     virtual void set_ef_main_weapon_type(u32 type) { m_ef_main_weapon_type = type; };
     virtual void set_ef_weapon_type(u32 type) { m_ef_weapon_type = type; };
@@ -530,4 +534,9 @@ public:
 
     virtual void DumpActiveParams(shared_str const& section_name, CInifile& dst_ini) const;
     virtual shared_str const GetAnticheatSectionName() const { return cNameSect(); };
+
+    // GUNSLINGER Mod
+public:
+    const SCOPES_VECTOR& Gunsl_GetScopesVector() { return m_scopes; }
+    const u8 Gunsl_GetCurScopeId() { return m_cur_scope; }
 };
