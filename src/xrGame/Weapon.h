@@ -13,6 +13,7 @@
 #include "first_bullet_controller.h"
 
 #include "CameraRecoil.h"
+#include "gunslinger_mod/EngineFriends.h"
 
 class CEntity;
 class ENGINE_API CMotionDef;
@@ -535,8 +536,8 @@ public:
     virtual void DumpActiveParams(shared_str const& section_name, CInifile& dst_ini) const;
     virtual shared_str const GetAnticheatSectionName() const { return cNameSect(); };
 
+private:
     // GUNSLINGER Mod
-public:
-    const SCOPES_VECTOR& Gunsl_GetScopesVector() { return m_scopes; }
-    const u8 Gunsl_GetCurScopeId() { return m_cur_scope; }
+    friend GunslingerMod::EngineFriendWrapper;
+    void* m_gunslingermod_buffer = nullptr;
 };

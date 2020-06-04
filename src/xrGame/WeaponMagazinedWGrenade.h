@@ -1,6 +1,7 @@
 #pragma once
 #include "WeaponMagazined.h"
 #include "RocketLauncher.h"
+#include "gunslinger_mod/EngineFriends.h"
 
 class CWeaponFakeGrenade;
 
@@ -90,7 +91,6 @@ public:
 
     virtual void UpdateGrenadeVisibility(bool visibility);
 
-public:
     // GUNSLINGER Mod
-    bool Gunsl_GetGrenadeMode() { return m_bGrenadeMode; }
+    friend GunslingerMod::EngineFriendWrapper;
 };

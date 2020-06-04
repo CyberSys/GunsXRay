@@ -6522,6 +6522,30 @@
     <ClInclude Include="gunslinger_mod\gunsl_config.h">
       <Filter>GunslingerMod</Filter>
     </ClInclude>
+    <ClInclude Include="gunslinger_mod\WeaponAdditionalBuffer.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\EngineFriends.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\CommonDefs.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\WeaponDataSaveLoad.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\PatchingInterface.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\BaseDefs.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\WeaponEvents.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\BaseGameData.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9906,6 +9930,24 @@
       <Filter>GunslingerMod</Filter>
     </ClCompile>
     <ClCompile Include="gunslinger_mod\gunsl_config.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\WeaponAdditionalBuffer.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\EngineFriends.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\WeaponDataSaveLoad.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\PatchingInterface.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\WeaponEvents.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\BaseGameData.cpp">
       <Filter>GunslingerMod</Filter>
     </ClCompile>
   </ItemGroup>

@@ -14,6 +14,7 @@
 #include "xrServer_Objects_ALife.h"
 #include "xrServer_Objects_ALife_Items.h"
 #include "xrCommon/xr_deque.h"
+#include "gunslinger_mod/EngineFriends.h"
 #ifdef DEBUG
 #include "xrEngine/pure.h"
 #endif
@@ -326,6 +327,9 @@ protected:
 public:
     IC bool is_helper_item() { return !!m_flags.test(FIsHelperItem); }
     IC void set_is_helper(bool is_helper) { m_flags.set(FIsHelperItem, is_helper); }
+
+    // GUNSLINGER Mod
+    friend class GunslingerMod::EngineFriendWrapper;
 }; // class CInventoryItem
 
 #include "inventory_item_inline.h"

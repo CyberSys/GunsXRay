@@ -954,10 +954,18 @@
     <ClInclude Include="group_hierarchy_holder_inline.h" />
     <ClInclude Include="gsc_dsigned_ltx.h" />
     <ClInclude Include="gunslinger_mod\ActorUtils.h" />
+    <ClInclude Include="gunslinger_mod\BaseDefs.h" />
+    <ClInclude Include="gunslinger_mod\BaseGameData.h" />
     <ClInclude Include="gunslinger_mod\collimator.h" />
+    <ClInclude Include="gunslinger_mod\CommonDefs.h" />
+    <ClInclude Include="gunslinger_mod\EngineFriends.h" />
     <ClInclude Include="gunslinger_mod\gunsl_config.h" />
     <ClInclude Include="gunslinger_mod\HudItemUtils.h" />
+    <ClInclude Include="gunslinger_mod\PatchingInterface.h" />
     <ClInclude Include="gunslinger_mod\UiUtils.h" />
+    <ClInclude Include="gunslinger_mod\WeaponAdditionalBuffer.h" />
+    <ClInclude Include="gunslinger_mod\WeaponDataSaveLoad.h" />
+    <ClInclude Include="gunslinger_mod\WeaponEvents.h" />
     <ClInclude Include="HairsZone.h" />
     <ClInclude Include="HangingLamp.h" />
     <ClInclude Include="harvest_time.h" />
@@ -2553,10 +2561,16 @@
     <ClCompile Include="group_hierarchy_holder.cpp" />
     <ClCompile Include="gsc_dsigned_ltx.cpp" />
     <ClCompile Include="gunslinger_mod\ActorUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\BaseGameData.cpp" />
     <ClCompile Include="gunslinger_mod\collimator.cpp" />
+    <ClCompile Include="gunslinger_mod\EngineFriends.cpp" />
     <ClCompile Include="gunslinger_mod\gunsl_config.cpp" />
     <ClCompile Include="gunslinger_mod\HudItemUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\PatchingInterface.cpp" />
     <ClCompile Include="gunslinger_mod\UiUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\WeaponAdditionalBuffer.cpp" />
+    <ClCompile Include="gunslinger_mod\WeaponDataSaveLoad.cpp" />
+    <ClCompile Include="gunslinger_mod\WeaponEvents.cpp" />
     <ClCompile Include="HairsZone.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>

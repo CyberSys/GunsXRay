@@ -26,6 +26,7 @@
 #include "Torch.h"
 #include "xrNetServer/NET_Messages.h"
 #include "xrCore/xr_token.h"
+#include "gunslinger_mod/PatchingInterface.h"
 
 #define WEAPON_REMOVE_TIME 60000
 #define ROTATION_TIME 0.25f
@@ -693,6 +694,7 @@ void CWeapon::load(IReader& input_packet)
         OnZoomOut();
 
     load_data(m_bRememberActorNVisnStatus, input_packet);
+    GunslingerMod::PatchingInterface::CWeapon_class::load(this, &input_packet);
 }
 
 void CWeapon::OnEvent(NET_Packet& P, u16 type)
