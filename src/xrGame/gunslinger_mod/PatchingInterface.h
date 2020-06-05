@@ -12,6 +12,7 @@ public:
     {
     public:
         static void load(CWeapon* wpn, IReader* packet);
+        static void net_Spawn_middle(CWeapon* wpn);
     };
 };
 } // namespace GunslingerMod
