@@ -6528,9 +6528,6 @@
     <ClInclude Include="gunslinger_mod\EngineFriends.h">
       <Filter>GunslingerMod</Filter>
     </ClInclude>
-    <ClInclude Include="gunslinger_mod\CommonDefs.h">
-      <Filter>GunslingerMod</Filter>
-    </ClInclude>
     <ClInclude Include="gunslinger_mod\WeaponDataSaveLoad.h">
       <Filter>GunslingerMod</Filter>
     </ClInclude>
@@ -6544,6 +6541,9 @@
       <Filter>GunslingerMod</Filter>
     </ClInclude>
     <ClInclude Include="gunslinger_mod\BaseGameData.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\Misc.h">
       <Filter>GunslingerMod</Filter>
     </ClInclude>
   </ItemGroup>
@@ -9948,6 +9948,9 @@
       <Filter>GunslingerMod</Filter>
     </ClCompile>
     <ClCompile Include="gunslinger_mod\BaseGameData.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\Misc.cpp">
       <Filter>GunslingerMod</Filter>
     </ClCompile>
   </ItemGroup>

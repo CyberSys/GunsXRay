@@ -42,7 +42,7 @@
 #include "raypick.h"
 #include "xrCDB/xr_collide_defs.h"
 #include "xrNetServer/NET_Messages.h"
-#include "gunslinger_mod/UiUtils.h"
+#include "gunslinger_mod/PatchingInterface.h"
 
 using namespace luabind;
 using namespace luabind::policy;
@@ -753,8 +753,13 @@ IC static void CLevel_Export(lua_State* luaState)
 
         def("vertex_id", &vertex_id),
 
-        def("game_id", &GameID), def("ray_pick", &ray_pick), def("is_ui_shown", &GunslingerMod::IsUIShown),
-        def("indicators_shown", &GunslingerMod::IndicatorsShown)],
+        def("game_id", &GameID), def("ray_pick", &ray_pick),
+        def("is_ui_shown", &GunslingerMod::PatchingInterface::ScriptExported::level::is_ui_shown),
+        def("indicators_shown", &GunslingerMod::PatchingInterface::ScriptExported::level::indicators_shown),
+        def("electronics_break", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_break),
+        def("electronics_restore", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_restore),
+        def("electronics_reset", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_reset),
+        def("electronics_apply", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_apply)],
 
         module(luaState, "actor_stats")[def("add_points", &add_actor_points),
             def("add_points_str", &add_actor_points_str), def("get_points", &get_actor_points)];

@@ -545,6 +545,7 @@ bool CWeapon::net_Spawn(CSE_Abstract* DC)
 {
     m_fRTZoomFactor = m_zoom_params.m_fScopeZoomFactor;
     const bool bResult = inherited::net_Spawn(DC);
+    GunslingerMod::PatchingInterface::CWeapon_class::net_Spawn_middle(this);
     CSE_Abstract* e = (CSE_Abstract*)(DC);
     CSE_ALifeItemWeapon* E = smart_cast<CSE_ALifeItemWeapon*>(e);
 

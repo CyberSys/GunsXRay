@@ -957,10 +957,10 @@
     <ClInclude Include="gunslinger_mod\BaseDefs.h" />
     <ClInclude Include="gunslinger_mod\BaseGameData.h" />
     <ClInclude Include="gunslinger_mod\collimator.h" />
-    <ClInclude Include="gunslinger_mod\CommonDefs.h" />
     <ClInclude Include="gunslinger_mod\EngineFriends.h" />
     <ClInclude Include="gunslinger_mod\gunsl_config.h" />
     <ClInclude Include="gunslinger_mod\HudItemUtils.h" />
+    <ClInclude Include="gunslinger_mod\Misc.h" />
     <ClInclude Include="gunslinger_mod\PatchingInterface.h" />
     <ClInclude Include="gunslinger_mod\UiUtils.h" />
     <ClInclude Include="gunslinger_mod\WeaponAdditionalBuffer.h" />
@@ -2566,6 +2566,7 @@
     <ClCompile Include="gunslinger_mod\EngineFriends.cpp" />
     <ClCompile Include="gunslinger_mod\gunsl_config.cpp" />
     <ClCompile Include="gunslinger_mod\HudItemUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\Misc.cpp" />
     <ClCompile Include="gunslinger_mod\PatchingInterface.cpp" />
     <ClCompile Include="gunslinger_mod\UiUtils.cpp" />
     <ClCompile Include="gunslinger_mod\WeaponAdditionalBuffer.cpp" />
