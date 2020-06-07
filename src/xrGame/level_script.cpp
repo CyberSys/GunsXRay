@@ -759,7 +759,8 @@ IC static void CLevel_Export(lua_State* luaState)
         def("electronics_break", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_break),
         def("electronics_restore", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_restore),
         def("electronics_reset", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_reset),
-        def("electronics_apply", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_apply)],
+        def("electronics_apply", &GunslingerMod::PatchingInterface::ScriptExported::level::electronics_apply),
+        def("valid_saved_game_int", &GunslingerMod::PatchingInterface::ScriptExported::level::valid_saved_game_int)],
 
         module(luaState, "actor_stats")[def("add_points", &add_actor_points),
             def("add_points_str", &add_actor_points_str), def("get_points", &get_actor_points)];

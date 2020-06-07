@@ -15,6 +15,12 @@ public:
         static void net_Spawn_middle(CWeapon* wpn);
     };
 
+    class CSavedGameWrapper_class
+    {
+    public:
+        static bool valid_saved_game_override(IReader* reader);
+    };
+
     class ScriptExported
     {
     public:
@@ -27,7 +33,10 @@ public:
             static bool electronics_restore();
             static bool electronics_reset();
             static bool electronics_apply();
+            static s32 valid_saved_game_int(u16 unused, pcstr save_name);
         };
     };
+
+    static void global_on_game_started_init();
 };
 } // namespace GunslingerMod

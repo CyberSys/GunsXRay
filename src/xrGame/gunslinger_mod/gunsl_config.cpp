@@ -4,6 +4,12 @@
 
 namespace GunslingerMod
 {
+const pcstr GUNSL_BASE_SECTION = "gunslinger_base";
+
+pcstr _mod_ver;
+pcstr _save_ver;
+pcstr _addon_name;
+
 //данные консольных команд
 //булевские флаги
 static u32 _console_bool_flags = 0;
@@ -62,5 +68,20 @@ float game_ini_r_single_def(pcstr section, pcstr key, float def)
     }
 }
 
+bool gunsl_config_Init()
+{
+    _mod_ver = game_ini_read_string(GUNSL_BASE_SECTION, "version");
+    _save_ver = game_ini_read_string(GUNSL_BASE_SECTION, "save_version");
+    _addon_name = game_ini_read_string(GUNSL_BASE_SECTION, "addon_name");
+
+    return true;
+}
+
 bool IsLensEnabled() { return (_mask_lens_enabled & _console_bool_flags) != 0; }
+
+pcstr GetModVer() { return _mod_ver; }
+
+pcstr GetSaveVer() { return _save_ver; }
+
+pcstr GetAddonName() { return _addon_name; }
 } // namespace GunslingerMod

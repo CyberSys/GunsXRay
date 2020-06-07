@@ -6546,6 +6546,9 @@
     <ClInclude Include="gunslinger_mod\Misc.h">
       <Filter>GunslingerMod</Filter>
     </ClInclude>
+    <ClInclude Include="gunslinger_mod\savedgames.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9951,6 +9954,12 @@
       <Filter>GunslingerMod</Filter>
     </ClCompile>
     <ClCompile Include="gunslinger_mod\Misc.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\savedgames.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\basedefs.cpp">
       <Filter>GunslingerMod</Filter>
     </ClCompile>
   </ItemGroup>

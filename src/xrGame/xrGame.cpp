@@ -11,6 +11,7 @@
 #include "xrUICore/XML/xrUIXmlParser.h"
 #include "xr_level_controller.h"
 #include "xrEngine/profiler.h"
+#include "gunslinger_mod/PatchingInterface.h"
 
 extern void FillUIStyleToken();
 extern void CleanupUIStyleToken();
@@ -49,6 +50,8 @@ static void load(int argc, char** argv, char** envp)
 #endif
     gStringTable = xr_new<CStringTable>();
     StringTable().Init();
+
+    GunslingerMod::PatchingInterface::global_on_game_started_init();
 }
 
 #ifdef XR_PLATFORM_LINUX

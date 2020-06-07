@@ -1,20 +1,27 @@
 #include "StdAfx.h"
 #include "EngineFriends.h"
+#include "savedgames.h"
 
-#include "WeaponMagazinedWGrenade.h"
+#include "xrEngine/device.h"
 #include "xrCore/xr_ini.h"
 #include "xrCore/FS.h"
-#include "xrEngine/device.h"
 #include "xrCore/_random.h"
+#include "xrCore/log.h"
+#include "WeaponMagazinedWGrenade.h"
+#include "saved_game_wrapper.h"
 
 namespace GunslingerMod
 {
 // for global stuff
 u32 EngineFriendWrapper::GetGameTickCount() { return Device.dwTimeGlobal; }
 float EngineFriendWrapper::random() { return ::Random.randF(0.f, 1.f); }
+void EngineFriendWrapper::LogText(pcstr text) { Log(text); }
+u32 EngineFriendWrapper::GetCurrentALifeVersion() { return ALIFE_VERSION; }
 
 // for IReader
 void EngineFriendWrapper::ReadFromReader(IReader* r, void* buf, size_t bytes_count) { r->r(buf, bytes_count); }
+size_t EngineFriendWrapper::ReaderLength(IReader* r) { return r->length(); }
+size_t EngineFriendWrapper::ReaderElapsed(IReader* r) { return r->elapsed(); }
 
 // for IniFile
 const CInifile* EngineFriendWrapper::GetGameIni() { return pSettings; }
@@ -84,4 +91,18 @@ void EngineFriendWrapper::SetWeaponMisfireStatus(CWeapon* wpn, bool status) { wp
 
 // for CWeaponMagazinedWGrenade
 bool EngineFriendWrapper::GetGrenadeMode(CWeaponMagazinedWGrenade* wpn) { return wpn->m_bGrenadeMode; }
+
+// for CSavedGameWrapper
+s32 EngineFriendWrapper::valid_saved_game_int(pcstr saved_game_name)
+{
+    string_path file_name;
+    if (!FS.exist(CSavedGameWrapper::saved_game_full_name(saved_game_name, file_name, SAVE_EXTENSION)))
+        if (!FS.exist(CSavedGameWrapper::saved_game_full_name(saved_game_name, file_name, SAVE_EXTENSION_LEGACY)))
+            return false;
+
+    IReader* stream = FS.r_open(file_name);
+    s32 result = static_cast<s32>(CSavedGameWrapper__valid_saved_game_override(stream));
+    FS.r_close(stream);
+    return (result);
+}
 } // namespace GunslingerMod

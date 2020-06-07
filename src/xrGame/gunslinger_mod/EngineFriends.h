@@ -28,9 +28,13 @@ public:
     // for global stuff
     static u32 GetGameTickCount();
     static float random();
+    static void LogText(pcstr text);
+    static u32 GetCurrentALifeVersion();
 
     // for IReader
     static void ReadFromReader(IReader* r, void* buf, size_t bytes_count);
+    static size_t ReaderLength(IReader* r);
+    static size_t ReaderElapsed(IReader* r);
 
     // for IniFile
     static const CInifile* GetGameIni();
@@ -56,5 +60,8 @@ public:
 
     // for CWeaponMagazinedWGrenade
     static bool GetGrenadeMode(CWeaponMagazinedWGrenade* wpn);
+
+    // for CSavedGameWrapper
+    static s32 valid_saved_game_int(pcstr saved_game_name);
 };
 } // namespace GunslingerMod

@@ -16,6 +16,7 @@
 #include "alife_simulator_header.h"
 #include "alife_simulator.h"
 #include "alife_spawn_registry.h"
+#include "gunslinger_mod/PatchingInterface.h"
 
 extern LPCSTR alife_section;
 
@@ -37,6 +38,8 @@ bool CSavedGameWrapper::saved_game_exist(LPCSTR saved_game_name)
 
 bool CSavedGameWrapper::valid_saved_game(IReader& stream)
 {
+    return GunslingerMod::PatchingInterface::CSavedGameWrapper_class::valid_saved_game_override(&stream);
+    /*
     if (stream.length() < 8)
         return (false);
 
@@ -47,6 +50,7 @@ bool CSavedGameWrapper::valid_saved_game(IReader& stream)
         return (false);
 
     return (true);
+    */
 }
 
 bool CSavedGameWrapper::valid_saved_game(LPCSTR saved_game_name)

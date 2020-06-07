@@ -73,4 +73,11 @@ void UpdateElectronicsProblemsCnt(TimeTicks dt)
         last_problems_update_was_decrease = (delta < 0);
     }
 }
+
+void ReadFromReader(IReader* r, void* buf, size_t bytes_count)
+{
+    return EngineFriendWrapper::ReadFromReader(r, buf, bytes_count);
+}
+u32 ReaderLength(IReader* r) { return EngineFriendWrapper::ReaderLength(r); }
+u32 ReaderElapsed(IReader* r) { return EngineFriendWrapper::ReaderElapsed(r); }
 } // namespace GunslingerMod
