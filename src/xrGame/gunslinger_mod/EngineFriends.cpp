@@ -23,6 +23,13 @@ void EngineFriendWrapper::ReadFromReader(IReader* r, void* buf, size_t bytes_cou
 size_t EngineFriendWrapper::ReaderLength(IReader* r) { return r->length(); }
 size_t EngineFriendWrapper::ReaderElapsed(IReader* r) { return r->elapsed(); }
 
+// for IWriter
+void EngineFriendWrapper::WriteU32ToWriter(IWriter* w, u32 value) { w->w_u32(value); }
+void EngineFriendWrapper::WriteStringZToWriter(IWriter* w, pcstr value) { w->w_stringZ(value); }
+
+// for CLocatorAPI
+u64 EngineFriendWrapper::AuthGet() { return FS.auth_get(); }
+
 // for IniFile
 const CInifile* EngineFriendWrapper::GetGameIni() { return pSettings; }
 

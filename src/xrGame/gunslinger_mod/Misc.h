@@ -10,4 +10,6 @@ bool ElectronicsProblemsImmediateApply();
 void ReadFromReader(IReader* r, void* buf, size_t bytes_count);
 u32 ReaderLength(IReader* r);
 u32 ReaderElapsed(IReader* r);
+void IWriter__w_u32(IWriter* w, u32 value);
+void IWriter__w_stringZ(IWriter* w, pcstr value);
 } // namespace GunslingerMod

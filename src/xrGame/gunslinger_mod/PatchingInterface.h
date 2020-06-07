@@ -1,6 +1,7 @@
 #pragma once
 
 class IReader;
+class IWriter;
 class CWeapon;
 
 namespace GunslingerMod
@@ -15,10 +16,22 @@ public:
         static void net_Spawn_middle(CWeapon* wpn);
     };
 
+    class CLevel_class
+    {
+    public:
+        static bool Connect2Server_ForceAuthCalc();
+    };
+
     class CSavedGameWrapper_class
     {
     public:
         static bool valid_saved_game_override(IReader* reader);
+    };
+
+    class CALifeStorageManager_class
+    {
+    public:
+        static void save(IWriter* w);
     };
 
     class ScriptExported

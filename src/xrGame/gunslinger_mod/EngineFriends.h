@@ -5,6 +5,7 @@ class CWeapon;
 class CHudItemObject;
 class CInifile;
 class IReader;
+class IWriter;
 
 namespace GunslingerMod
 {
@@ -35,6 +36,13 @@ public:
     static void ReadFromReader(IReader* r, void* buf, size_t bytes_count);
     static size_t ReaderLength(IReader* r);
     static size_t ReaderElapsed(IReader* r);
+
+    // for IWriter
+    static void WriteU32ToWriter(IWriter* w, u32 value);
+    static void WriteStringZToWriter(IWriter* w, pcstr value);
+
+    // for CLocatorAPI
+    static u64 AuthGet();
 
     // for IniFile
     static const CInifile* GetGameIni();

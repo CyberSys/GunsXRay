@@ -80,4 +80,7 @@ void ReadFromReader(IReader* r, void* buf, size_t bytes_count)
 }
 u32 ReaderLength(IReader* r) { return EngineFriendWrapper::ReaderLength(r); }
 u32 ReaderElapsed(IReader* r) { return EngineFriendWrapper::ReaderElapsed(r); }
+
+void IWriter__w_u32(IWriter* w, u32 value) { EngineFriendWrapper::WriteU32ToWriter(w, value); }
+void IWriter__w_stringZ(IWriter* w, pcstr value) { EngineFriendWrapper::WriteStringZToWriter(w, value); }
 } // namespace GunslingerMod

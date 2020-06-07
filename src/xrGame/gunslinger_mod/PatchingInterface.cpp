@@ -17,10 +17,14 @@ void PatchingInterface::CWeapon_class::load(CWeapon* wpn, IReader* packet)
 
 void PatchingInterface::CWeapon_class::net_Spawn_middle(CWeapon* wpn) { CreateWpnBufIfNeeded(wpn); }
 
+bool PatchingInterface::CLevel_class::Connect2Server_ForceAuthCalc() { return true; }
+
 bool PatchingInterface::CSavedGameWrapper_class::valid_saved_game_override(IReader* reader)
 {
     return (CSavedGameWrapper__valid_saved_game_override(reader) != GUNS_UNCOMPATIBLE_SAVE);
 }
+
+void PatchingInterface::CALifeStorageManager_class::save(IWriter* w) { ConstructGunsHeader(w); }
 
 bool PatchingInterface::ScriptExported::level::is_ui_shown() { return IsUIShown(); }
 bool PatchingInterface::ScriptExported::level::indicators_shown() { return IndicatorsShown(); }

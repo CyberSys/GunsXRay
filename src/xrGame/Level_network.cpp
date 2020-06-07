@@ -23,6 +23,8 @@
 
 #include "xrPhysics/PhysicsCommon.h"
 
+#include "gunslinger_mod/PatchingInterface.h"
+
 const int max_objects_size = 2 * 1024;
 const int max_objects_size_in_save = 8 * 1024;
 
@@ -349,7 +351,7 @@ bool CLevel::Connect2Server(const char* options)
     m_bConnectResultReceived = false;
     m_bConnectResult = true;
 
-    if (!psNET_direct_connect)
+    if (!psNET_direct_connect || GunslingerMod::PatchingInterface::CLevel_class::Connect2Server_ForceAuthCalc())
     {
         xr_auth_strings_t tmp_ignore;
         xr_auth_strings_t tmp_check;

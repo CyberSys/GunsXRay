@@ -22,6 +22,8 @@
 #include "string_table.h"
 #include "xrEngine/IGame_Persistent.h"
 #include "autosave_manager.h"
+#include "gunslinger_mod/PatchingInterface.h"
+
 XRCORE_API string_path g_bug_report_file;
 
 using namespace ALife;
@@ -79,7 +81,8 @@ void CALifeStorageManager::save(LPCSTR save_name_no_check, bool update_name)
     string_path temp;
     FS.update_path(temp, "$game_saves$", m_save_name);
     IWriter* writer = FS.w_open(temp);
-    writer->w_u32(u32(-1));
+    // writer->w_u32(u32(-1));
+    GunslingerMod::PatchingInterface::CALifeStorageManager_class::save(writer);
     writer->w_u32(ALIFE_VERSION);
 
     writer->w_u32(source_count);

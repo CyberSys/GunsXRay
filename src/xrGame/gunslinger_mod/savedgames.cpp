@@ -22,6 +22,27 @@ const u32 GUNS_KEY_TYPE_TERMINATOR = 0x00030000;
 
 u32 GetTransformedGunsSaveVer() { return (0xFFFFFFFF - GUNS_SAVE_VER) ^ GUNS_MASK; }
 
+void GetAuthVal(u32* phigh, u32* plow)
+{
+    u64 auth = EngineFriendWrapper::AuthGet();
+    *plow = auth;
+    *phigh = auth >> 32;
+}
+
+void WriteGunsStringZData(IWriter* w, u16 key_id, pcstr data)
+{
+    IWriter__w_u32(w, GUNS_KEY_TYPE_STRINGZ ^ key_id);
+    IWriter__w_stringZ(w, data);
+}
+
+void WriteGunsU32Data(IWriter* w, u16 key_id, u32 data)
+{
+    IWriter__w_u32(w, GUNS_KEY_TYPE_U32 ^ key_id);
+    IWriter__w_u32(w, data);
+}
+
+void WriteGunsDataTerminator(IWriter* w) { IWriter__w_u32(w, GUNS_KEY_TYPE_TERMINATOR); }
+
 bool ReadNextGunsU32Data(IReader* reader, u16& id, u32& value)
 {
     if (ReaderElapsed(reader) < 8)
@@ -176,5 +197,24 @@ ESavedGameParseStatus CSavedGameWrapper__valid_saved_game_override(IReader* read
             ", " + save_ver + "(" + GetSaveVer() + ")" + ", " + inttohex(d2, 8) + inttohex(d1, 8));
     }
     return result;
+}
+
+void ConstructGunsHeader(IWriter* packet)
+{
+    u32 l, h;
+    GetAuthVal(&h, &l);
+
+    //Сначала - наш хидер вместо вырезанного (-1)
+    IWriter__w_u32(packet, GetTransformedGunsSaveVer());
+
+    //Теперь - данные мода
+    WriteGunsU32Data(packet, GUNS_KEY_ID_AUTH_LOW, l);
+    WriteGunsU32Data(packet, GUNS_KEY_ID_AUTH_HIGH, h);
+    WriteGunsStringZData(packet, GUNS_KEY_ID_MOD_NAME, GetAddonName());
+    WriteGunsStringZData(packet, GUNS_KEY_ID_SAVE_VER, GetSaveVer());
+    WriteGunsStringZData(packet, GUNS_KEY_ID_MOD_VER, GetModVer());
+
+    //Завершение данных ганса
+    WriteGunsDataTerminator(packet);
 }
 } // namespace GunslingerMod

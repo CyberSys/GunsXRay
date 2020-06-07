@@ -13,4 +13,5 @@ enum ESavedGameParseStatus
 };
 
 ESavedGameParseStatus CSavedGameWrapper__valid_saved_game_override(IReader* reader);
+void ConstructGunsHeader(IWriter* packet);
 } // namespace GunslingerMod
