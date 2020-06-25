@@ -12,6 +12,7 @@ class CScriptEngine;
 class AISpaceBase;
 class ISoundManager;
 class UICore;
+class GunslingerPatchingApi;
 
 class XRAPI_API EngineGlobalEnvironment
 {
@@ -26,6 +27,7 @@ public:
     AISpaceBase* AISpace;
     ISoundManager* Sound;
     UICore* UI;
+    GunslingerPatchingApi* GunslingerApi;
 
     int CurrentRenderer;
 

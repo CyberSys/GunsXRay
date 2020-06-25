@@ -1,5 +1,7 @@
 #pragma once
 
+#include "gunslinger_mod/EngineFriends.h"
+
 class CCustomRocket;
 class CGameObject;
 
@@ -26,4 +28,6 @@ protected:
     void dropCurrentRocket();
     u32 getRocketCount();
     float m_fLaunchSpeed;
+
+    friend GunslingerMod::EngineFriendWrapper;
 };

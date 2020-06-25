@@ -7,9 +7,19 @@
 #include "Misc.h"
 #include "savedgames.h"
 #include "gunsl_config.h"
+#include "WeaponUpdate.h"
 
 namespace GunslingerMod
 {
+void PatchingInterface::CObjectList_class::SingleUpdate(IGameObject* O)
+{
+    CWeapon* wpn = dynamic_cast<CWeapon*>(O);
+    if (wpn != nullptr)
+    {
+        CWeapon__ModUpdate(wpn);
+    }
+}
+
 void PatchingInterface::CWeapon_class::load(CWeapon* wpn, IReader* packet)
 {
     LoadAdditionalDataFromReader(wpn, packet);
@@ -46,5 +56,14 @@ s32 PatchingInterface::ScriptExported::level::valid_saved_game_int(u16 unused, p
     return EngineFriendWrapper::valid_saved_game_int(save_name);
 }
 
-void PatchingInterface::global_on_game_started_init() { gunsl_config_Init(); }
+void PatchingInterface::global_on_game_started_init()
+{
+    GEnv.GunslingerApi = new GunslingerPatchingApi();
+    gunsl_config_Init();
+}
 } // namespace GunslingerMod
+
+void GunslingerPatchingApi::CObjectList_SingleUpdate_Patch(IGameObject* O)
+{
+    GunslingerMod::PatchingInterface::CObjectList_class::SingleUpdate(O);
+}

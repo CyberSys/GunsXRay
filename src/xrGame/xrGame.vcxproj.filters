@@ -6549,6 +6549,27 @@
     <ClInclude Include="gunslinger_mod\savedgames.h">
       <Filter>GunslingerMod</Filter>
     </ClInclude>
+    <ClInclude Include="gunslinger_mod\WeaponUpdate.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\xr_RocketLauncher.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\xr_Cartridge.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\ControllerMonster.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\DetectorUtils.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\ActorDOF.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
+    <ClInclude Include="gunslinger_mod\xr_BoneUtils.h">
+      <Filter>GunslingerMod</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9960,6 +9981,27 @@
       <Filter>GunslingerMod</Filter>
     </ClCompile>
     <ClCompile Include="gunslinger_mod\basedefs.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\WeaponUpdate.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\xr_RocketLauncher.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\xr_Cartridge.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\ControllerMonster.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\DetectorUtils.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\ActorDOF.cpp">
+      <Filter>GunslingerMod</Filter>
+    </ClCompile>
+    <ClCompile Include="gunslinger_mod\xr_BoneUtils.cpp">
       <Filter>GunslingerMod</Filter>
     </ClCompile>
   </ItemGroup>

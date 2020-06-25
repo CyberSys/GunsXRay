@@ -12,10 +12,7 @@ BOOL CStringTable::m_bWriteErrorsToLog = FALSE;
 u32 CStringTable::LanguageID = std::numeric_limits<u32>::max();
 xr_vector<xr_token> CStringTable::languagesToken;
 
-CStringTable::CStringTable()
-{
-    pData = nullptr;
-}
+CStringTable::CStringTable() { pData = nullptr; }
 
 CStringTable::~CStringTable() { Destroy(); }
 void CStringTable::Destroy()
@@ -132,9 +129,8 @@ void CStringTable::SetLanguage()
     else
     {
         pData->m_sLanguage = pSettings->r_string("string_table", "language");
-        auto it = std::find_if(languagesToken.begin(), languagesToken.end(), [](const xr_token& token) {
-            return token.name && token.name == pData->m_sLanguage;
-        });
+        auto it = std::find_if(languagesToken.begin(), languagesToken.end(),
+            [](const xr_token& token) { return token.name && token.name == pData->m_sLanguage; });
 
         R_ASSERT3(it != languagesToken.end(), "Check localization.ltx! Current language: ", pData->m_sLanguage.c_str());
         if (it != languagesToken.end())
@@ -159,8 +155,14 @@ void CStringTable::Load(LPCSTR xml_file_full)
     {
         LPCSTR string_name = uiXml.ReadAttrib(uiXml.GetRoot(), "string", i, "id", NULL);
 
-        VERIFY3(pData->m_StringTable.find(string_name) == pData->m_StringTable.end(), "duplicate string table id",
-            string_name);
+        // Normal for Gunslinger
+        // VERIFY3(pData->m_StringTable.find(string_name) == pData->m_StringTable.end(), "duplicate string table
+        //        id",
+        //        string_name);
+        if (pData->m_StringTable.find(string_name) == pData->m_StringTable.end())
+        {
+            Msg("duplicate string table id %s", string_name);
+        }
 
         LPCSTR string_text = uiXml.Read(uiXml.GetRoot(), "string:text", i, NULL);
 

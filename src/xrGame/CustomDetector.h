@@ -5,6 +5,7 @@
 #include "CustomZone.h"
 #include "Artefact.h"
 #include "ai_sounds.h"
+#include "gunslinger_mod/EngineFriends.h"
 
 class CCustomZone;
 class CInventoryOwner;
@@ -98,7 +99,6 @@ public:
             }
             else
                 break;
-
         } while (true);
     }
 };
@@ -155,6 +155,7 @@ public:
     virtual bool CheckCompatibility(CHudItem* itm);
 
     virtual u32 ef_detector_type() const { return 1; };
+
 protected:
     bool CheckCompatibilityInt(CHudItem* itm, u16* slot_to_activate);
     void TurnDetectorInternal(bool b);
@@ -166,8 +167,10 @@ protected:
 
     bool m_bWorking;
     float m_fAfVisRadius;
-    float m_fDecayRate; //Alundaio
+    float m_fDecayRate; // Alundaio
     CAfList m_artefacts;
+
+    friend GunslingerMod::EngineFriendWrapper;
 };
 
 class CZoneList : public CDetectList<CCustomZone>

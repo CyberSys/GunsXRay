@@ -3,6 +3,8 @@
 #pragma once
 
 #include "xrEngine/IGame_Persistent.h"
+#include "gunslinger_mod/EngineFriends.h"
+
 class CMainMenu;
 class CUICursor;
 class CParticlesObject;
@@ -100,6 +102,8 @@ public:
     virtual void SetBaseDof(const Fvector3& dof);
     virtual void OnSectorChanged(int sector);
     virtual void OnAssetsChanged();
+
+    friend GunslingerMod::EngineFriendWrapper;
 };
 
 IC CGamePersistent& GamePersistent() { return *((CGamePersistent*)g_pGamePersistent); }

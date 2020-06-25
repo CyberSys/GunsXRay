@@ -10,6 +10,8 @@ class CMotionDef;
 #include "inventory_space.h"
 #include "HudSound.h"
 
+#include "gunslinger_mod/EngineFriends.h"
+
 struct attachable_hud_item;
 class motion_marks;
 
@@ -89,7 +91,7 @@ public:
     virtual void OnH_A_Independent();
 
     virtual void PlaySound(LPCSTR alias, const Fvector& position);
-    virtual void PlaySound(pcstr alias, const Fvector& position, u8 index); //Alundaio: Play at index
+    virtual void PlaySound(pcstr alias, const Fvector& position, u8 index); // Alundaio: Play at index
     virtual bool Action(u16 cmd, u32 flags) { return false; }
     void OnMovementChanged(ACTOR_DEFS::EMoveCommand cmd);
 
@@ -146,6 +148,7 @@ public:
     virtual void render_item_3d_ui() {}
     virtual bool render_item_3d_ui_query() { return false; }
     virtual bool CheckCompatibility(CHudItem*) { return true; }
+
 protected:
     IC void SetPending(BOOL H) { m_huditem_flags.set(fl_pending, H); }
     shared_str hud_sect;
@@ -181,6 +184,8 @@ public:
     virtual void debug_draw_firedeps(){};
 
     virtual CHudItem* cast_hud_item() { return this; }
-    void PlayAnimIdleMovingCrouch(); //AVO: new crouch idle animation
+    void PlayAnimIdleMovingCrouch(); // AVO: new crouch idle animation
     bool isHUDAnimationExist(pcstr anim_name) const;
+
+    friend GunslingerMod::EngineFriendWrapper;
 };

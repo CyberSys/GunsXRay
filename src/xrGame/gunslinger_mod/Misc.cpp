@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Misc.h"
 #include "BaseDefs.h"
+#include "BaseGameData.h"
 
 namespace GunslingerMod
 {
@@ -8,6 +9,15 @@ static u32 previous_electronics_problems_counter = 0;
 static u32 target_electronics_problems_counter = 0;
 static u32 current_electronics_problems_counter = 0;
 static bool last_problems_update_was_decrease = false;
+
+CScriptGameObject* game_object_GetScriptGameObject(CGameObject* obj)
+{
+    return EngineFriendWrapper::GetScriptGameObject(obj);
+}
+
+CSE_Abstract* get_server_object_by_id(u16 id) { return EngineFriendWrapper::ID_to_entity(id); }
+
+void alife_release(CSE_Abstract* srv_obj) { EngineFriendWrapper::alife_release(srv_obj); }
 
 void ResetElectronicsProblems() { target_electronics_problems_counter = 0; }
 
@@ -83,4 +93,6 @@ u32 ReaderElapsed(IReader* r) { return EngineFriendWrapper::ReaderElapsed(r); }
 
 void IWriter__w_u32(IWriter* w, u32 value) { EngineFriendWrapper::WriteU32ToWriter(w, value); }
 void IWriter__w_stringZ(IWriter* w, pcstr value) { EngineFriendWrapper::WriteStringZToWriter(w, value); }
+
+u16 GetCObjectID(IGameObject* o) { return EngineFriendWrapper::GetID(o); }
 } // namespace GunslingerMod

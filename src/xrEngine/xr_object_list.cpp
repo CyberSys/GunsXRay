@@ -13,6 +13,8 @@
 #include "GameFont.h"
 #include "PerformanceAlert.hpp"
 
+#include "xrGame/gunslinger_mod/PatchingInterface.h"
+
 class fClassEQ
 {
     CLASS_ID cls;
@@ -121,6 +123,8 @@ void CObjectList::SingleUpdate(IGameObject* O)
         return;
     }
 
+    GEnv.GunslingerApi->CObjectList_SingleUpdate_Patch(O);
+
     if (!O->processing_enabled())
     {
 #ifdef DEBUG
@@ -167,7 +171,6 @@ void CObjectList::SingleUpdate(IGameObject* O)
                     parent_obj->ID(),
                     parent_obj->cName().c_str(),
                     parent_obj->cNameSect().c_str());
-
             }
             __except (EXCEPTION_EXECUTE_HANDLER)
             {
@@ -382,8 +385,9 @@ u32 CObjectList::net_Export(NET_Packet* _Packet, u32 start, u32 max_object_size)
                 u32 size = u32(Packet.w_tell() - position) - sizeof(u8);
                 if (size >= 256)
                 {
-                    xrDebug::Fatal(DEBUG_INFO, "Object [%s][%d] exceed network-data limit\n size=%d, Pend=%d, Pstart=%d",
-                    *P->cName(), P->ID(), size, Packet.w_tell(), position);
+                    xrDebug::Fatal(DEBUG_INFO,
+                        "Object [%s][%d] exceed network-data limit\n size=%d, Pend=%d, Pstart=%d", *P->cName(), P->ID(),
+                        size, Packet.w_tell(), position);
                 }
             }
 #endif
@@ -438,7 +442,6 @@ void CObjectList::net_Import(NET_Packet* Packet)
 /*
 IGameObject* CObjectList::net_Find(u16 ID)
 {
-
 xr_map<u32,IGameObject*>::iterator it = map_NETID.find(ID);
 return (it==map_NETID.end())?0:it->second;
 }
@@ -542,7 +545,6 @@ void CObjectList::Destroy(IGameObject* game_obj)
         if (iter == objects_sleeping.end())
             FATAL("! Unregistered object being destroyed");
         objects_sleeping.erase(iter);
-
     }
 
     g_pGamePersistent->ObjectPool.destroy(game_obj);
@@ -571,7 +573,7 @@ void CObjectList::dump_list(Objects& v, pcstr reason)
 #ifdef DEBUG
     for (auto& it : v)
         Msg("%x - name [%s] ID[%d] parent[%s] getDestroy()=[%s]", it, it->cName().c_str(), it->ID(),
-        it->H_Parent() ? it->H_Parent()->cName().c_str() : "", it->getDestroy() ? "yes" : "no");
+            it->H_Parent() ? it->H_Parent()->cName().c_str() : "", it->getDestroy() ? "yes" : "no");
 #endif // #ifdef DEBUG
 }
 

@@ -8,6 +8,8 @@
 #include "physic_item.h"
 #include "xrPhysics/PHUpdateObject.h"
 
+#include "gunslinger_mod/EngineFriends.h"
+
 class CRocketLauncher;
 struct dContact;
 struct SGameMtl;
@@ -156,6 +158,8 @@ protected:
     virtual void StopFlyParticles();
 
     virtual void UpdateParticles();
+
+    friend GunslingerMod::EngineFriendWrapper;
 #ifdef DEBUG
     virtual void deactivate_physics_shell();
 #endif

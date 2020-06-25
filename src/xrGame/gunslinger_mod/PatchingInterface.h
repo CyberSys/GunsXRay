@@ -1,5 +1,11 @@
 #pragma once
 
+#ifdef ENGINE_BUILD
+#define GUNS_PATCHING_API __declspec(dllimport)
+#else
+#define GUNS_PATCHING_API __declspec(dllexport)
+#endif
+
 class IReader;
 class IWriter;
 class CWeapon;
@@ -9,6 +15,12 @@ namespace GunslingerMod
 class PatchingInterface
 {
 public:
+    class CObjectList_class
+    {
+    public:
+        static void SingleUpdate(IGameObject* O);
+    };
+
     class CWeapon_class
     {
     public:
@@ -53,3 +65,9 @@ public:
     static void global_on_game_started_init();
 };
 } // namespace GunslingerMod
+
+class GunslingerPatchingApi
+{
+public:
+    virtual void CObjectList_SingleUpdate_Patch(IGameObject* O);
+};

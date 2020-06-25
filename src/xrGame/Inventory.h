@@ -1,5 +1,6 @@
 #pragma once
 #include "inventory_item.h"
+#include "gunslinger_mod/EngineFriends.h"
 
 class CInventory;
 class CInventoryItem;
@@ -190,4 +191,6 @@ private:
     bool IsSlotBlocked(u16 slot_id) const;
     void TryActivatePrevSlot();
     void TryDeactivateActiveSlot();
+
+    friend GunslingerMod::EngineFriendWrapper;
 };

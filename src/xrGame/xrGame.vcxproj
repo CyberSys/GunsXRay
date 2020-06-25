@@ -953,10 +953,13 @@
     <ClInclude Include="group_hierarchy_holder.h" />
     <ClInclude Include="group_hierarchy_holder_inline.h" />
     <ClInclude Include="gsc_dsigned_ltx.h" />
+    <ClInclude Include="gunslinger_mod\ActorDOF.h" />
     <ClInclude Include="gunslinger_mod\ActorUtils.h" />
     <ClInclude Include="gunslinger_mod\BaseDefs.h" />
     <ClInclude Include="gunslinger_mod\BaseGameData.h" />
     <ClInclude Include="gunslinger_mod\collimator.h" />
+    <ClInclude Include="gunslinger_mod\ControllerMonster.h" />
+    <ClInclude Include="gunslinger_mod\DetectorUtils.h" />
     <ClInclude Include="gunslinger_mod\EngineFriends.h" />
     <ClInclude Include="gunslinger_mod\gunsl_config.h" />
     <ClInclude Include="gunslinger_mod\HudItemUtils.h" />
@@ -967,6 +970,10 @@
     <ClInclude Include="gunslinger_mod\WeaponAdditionalBuffer.h" />
     <ClInclude Include="gunslinger_mod\WeaponDataSaveLoad.h" />
     <ClInclude Include="gunslinger_mod\WeaponEvents.h" />
+    <ClInclude Include="gunslinger_mod\WeaponUpdate.h" />
+    <ClInclude Include="gunslinger_mod\xr_BoneUtils.h" />
+    <ClInclude Include="gunslinger_mod\xr_Cartridge.h" />
+    <ClInclude Include="gunslinger_mod\xr_RocketLauncher.h" />
     <ClInclude Include="HairsZone.h" />
     <ClInclude Include="HangingLamp.h" />
     <ClInclude Include="harvest_time.h" />
@@ -2561,10 +2568,13 @@
     <ClCompile Include="GrenadeLauncher.cpp" />
     <ClCompile Include="group_hierarchy_holder.cpp" />
     <ClCompile Include="gsc_dsigned_ltx.cpp" />
+    <ClCompile Include="gunslinger_mod\ActorDOF.cpp" />
     <ClCompile Include="gunslinger_mod\ActorUtils.cpp" />
     <ClCompile Include="gunslinger_mod\basedefs.cpp" />
     <ClCompile Include="gunslinger_mod\BaseGameData.cpp" />
     <ClCompile Include="gunslinger_mod\collimator.cpp" />
+    <ClCompile Include="gunslinger_mod\ControllerMonster.cpp" />
+    <ClCompile Include="gunslinger_mod\DetectorUtils.cpp" />
     <ClCompile Include="gunslinger_mod\EngineFriends.cpp" />
     <ClCompile Include="gunslinger_mod\gunsl_config.cpp" />
     <ClCompile Include="gunslinger_mod\HudItemUtils.cpp" />
@@ -2575,6 +2585,10 @@
     <ClCompile Include="gunslinger_mod\WeaponAdditionalBuffer.cpp" />
     <ClCompile Include="gunslinger_mod\WeaponDataSaveLoad.cpp" />
     <ClCompile Include="gunslinger_mod\WeaponEvents.cpp" />
+    <ClCompile Include="gunslinger_mod\WeaponUpdate.cpp" />
+    <ClCompile Include="gunslinger_mod\xr_BoneUtils.cpp" />
+    <ClCompile Include="gunslinger_mod\xr_Cartridge.cpp" />
+    <ClCompile Include="gunslinger_mod\xr_RocketLauncher.cpp" />
     <ClCompile Include="HairsZone.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>

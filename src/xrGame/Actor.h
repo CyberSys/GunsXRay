@@ -17,6 +17,8 @@
 
 #include "step_manager.h"
 
+#include "gunslinger_mod/EngineFriends.h"
+
 using namespace ACTOR_DEFS;
 
 class CInfoPortion;
@@ -782,6 +784,8 @@ private:
     {
         mstate_wishful = state;
     }
+
+    friend GunslingerMod::EngineFriendWrapper;
 };
 
 extern bool isActorAccelerated(u32 mstate, bool ZoomMode);
