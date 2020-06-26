@@ -45,6 +45,8 @@ bool IsSilencerAttached(CWeapon* wpn);
 bool IsGLAttached(CWeapon* wpn);
 bool IsGLEnabled(CWeapon* wpn);
 
+bool IsWeaponJammed(CWeapon* wpn);
+
 u32 GetInstalledUpgradesCount(CInventoryItem* itm);
 pcstr GetInstalledUpgradeSection(CInventoryItem* itm, u32 index);
 bool FindBoolValueInUpgradesDef(CInventoryItem* itm, pcstr key, bool def, bool scan_after_nodefault);
@@ -71,6 +73,8 @@ IGameObject* GetOwner(CHudItemObject* wpn);
 
 bool IsAimNow(CHudItemObject* wpn);
 float GetAimFactor(CWeapon* wpn);
+
+bool IsTriStateReload(CWeapon* wpn);
 
 EWeaponHudState GetCurrentState(CHudItemObject* wpn);
 

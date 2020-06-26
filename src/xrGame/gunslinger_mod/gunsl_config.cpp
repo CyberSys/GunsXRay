@@ -92,6 +92,18 @@ s32 game_ini_r_int_def(pcstr section, pcstr key, s32 def)
     }
 }
 
+pcstr game_ini_read_string_def(pcstr section, pcstr key, pcstr def)
+{
+    if (game_ini_line_exist(section, key))
+    {
+        return game_ini_read_string(section, key);
+    }
+    else
+    {
+        return def;
+    }
+}
+
 Fvector3 game_ini_read_vector3_def(pcstr section, pcstr key, Fvector3* def)
 {
     if (game_ini_line_exist(section, key))

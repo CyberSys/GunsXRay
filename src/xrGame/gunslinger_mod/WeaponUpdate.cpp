@@ -22,6 +22,187 @@
 
 namespace GunslingerMod
 {
+u8 GetOrdinalAmmoType(CWeapon* wpn)
+{
+    if (game_ini_r_bool_def(GetHUDSection(wpn), "ammo_params_use_last_cartridge_type", false) &&
+        (GetAmmoInMagCount(wpn) > 0))
+    {
+        //если указан этот параметр, то в остальных режимах за тип секции отвечает тип последнего патрона
+        return GetCartridgeType(GetCartridgeFromMagVector(wpn, GetAmmoInMagCount(wpn) - 1));
+    }
+    else
+    {
+        return GetAmmoTypeIndex(wpn, IsGrenadeMode(wpn));
+    }
+}
+
+void ProcessAmmoAdv(CWeapon* wpn, bool forced = false)
+{
+    pcstr hud_sect = GetHUDSection(wpn);
+    bool g_b = IsGrenadeMode(wpn);
+
+    if ((!g_b) && (GetCurrentState(wpn) == EWeaponStates__eFire) && (!forced) &&
+        game_ini_r_bool_def(hud_sect, "ammo_params_toggle_shooting", false))
+    {
+        //во время стрельбы не производить обновление костей - нужно для корректных гильз у дробовиков
+        return;
+    }
+
+    u32 cnt = GetAmmoInMagCount(wpn);
+
+    s32 ammotype = 0;
+    if (g_b)
+    {
+        //Оружие в режиме стрельбы подстволом
+        ammotype = GetOrdinalAmmoType(wpn);
+    }
+    else if (GetCurrentState(wpn) == EWeaponStates__eReload)
+    {
+        if (IsWeaponJammed(wpn))
+        {
+            //идет расклин
+            ammotype = GetOrdinalAmmoType(wpn);
+        }
+        else if (IsTriStateReload(wpn))
+        {
+            //идет перезарядка по типу дробовика
+            ammotype = GetAmmoTypeToReload(wpn);
+            cnt = cnt + 1;
+        }
+        else
+        {
+            //идет обычная перезарядка
+            //патрон в патроннике может быть старого типа! учитываем это
+            //обновление синхронно со счетчиком
+            ammotype = GetAmmoTypeIndex(wpn, g_b);
+
+            //Хак для неправильно заанимированных моделей вроде сайги - при обычных релоадах нам может потребоваться
+            //отображать в магазине на один патрон МЕНЬШЕ чем в реальности - они не учитывают патрон в патроннике!
+            //Поэтому если на счетчике 1, и мы жмем релоад, в магазине будет "лишний" патрон! Хотя магазин как раз
+            //должен быть пуст
+            if (game_ini_r_bool_def(hud_sect, "minus_ammo_in_usual_reloads", false) && (cnt >= 1) &&
+                (strstr(GetActualCurrentAnim(wpn), "_empty") == nullptr))
+            {
+                cnt = cnt - 1;
+            }
+        }
+    }
+    else
+    {
+        //не в состоянии перезарядки, подствол выключен
+        ammotype = GetOrdinalAmmoType(wpn);
+
+        //Хак для неправильно заанимированных моделей, не учитывающих патрон в патроннике - нам может потребоваться
+        //отображать в магазине на один патрон МЕНЬШЕ
+        if (game_ini_r_bool_def(hud_sect, "minus_ammo_in_bore", false) && (cnt >= 1) &&
+            (leftstr(GetActualCurrentAnim(wpn), length("anm_bore")) == "anm_bore"))
+        {
+            cnt = cnt - 1;
+        }
+    };
+
+    pcstr bones_sect = nullptr;
+    string sect_w_ammotype = string("ammo_params_section_") + inttostr(ammotype);
+    if (game_ini_line_exist(hud_sect, sect_w_ammotype.c_str()))
+    {
+        bones_sect = game_ini_read_string(hud_sect, sect_w_ammotype.c_str());
+    }
+    else if (game_ini_line_exist(hud_sect, "ammo_params_section"))
+    {
+        bones_sect = game_ini_read_string(hud_sect, "ammo_params_section");
+    }
+
+    if (bones_sect != nullptr)
+    {
+        if (IsWeaponJammed(wpn) && game_ini_line_exist(bones_sect, "additional_ammo_bone_when_jammed") &&
+            game_ini_r_bool(bones_sect, "additional_ammo_bone_when_jammed"))
+        {
+            cnt = cnt + 1;
+        }
+
+        //скрываем все
+        pcstr bones = game_ini_read_string(bones_sect, "all_bones");
+        SetWeaponMultipleBonesStatus(wpn, bones, false);
+
+        //отображаем нужные
+        string param_name = string("configuration_") + inttostr(cnt);
+        if (game_ini_line_exist(bones_sect, param_name.c_str()))
+        {
+            bones = game_ini_read_string(bones_sect, param_name.c_str());
+            SetWeaponMultipleBonesStatus(wpn, bones, true);
+        }
+    }
+}
+
+void ProcessAmmo(CWeapon* wpn, bool forced = false)
+{
+    pcstr hud_sect = GetHUDSection(wpn);
+    if (game_ini_r_bool_def(hud_sect, "use_advanced_ammo_bones", false))
+    {
+        ProcessAmmoAdv(wpn, forced);
+        return;
+    }
+
+    if (!game_ini_r_bool_def(hud_sect, "use_ammo_bones", false))
+    {
+        return;
+    }
+
+    string prefix = game_ini_read_string(hud_sect, "ammo_bones_prefix");
+
+    string prefix_hide = game_ini_read_string_def(hud_sect, "ammo_hide_bones_prefix", "");
+    string prefix_var = game_ini_read_string_def(hud_sect, "ammo_var_bones_prefix", "");
+    s32 start_index = game_ini_r_int_def(hud_sect, "start_ammo_bone_index", 0);
+    s32 limitator = game_ini_r_int_def(hud_sect, "end_ammo_bone_index", 0);
+
+    s32 finish_index = start_index + GetAmmoInMagCount(wpn) - 1;
+
+    if (IsWeaponJammed(wpn) && game_ini_line_exist(hud_sect, "additional_ammo_bone_when_jammed") &&
+        game_ini_r_bool(hud_sect, "additional_ammo_bone_when_jammed"))
+    {
+        finish_index = finish_index + 1;
+    }
+
+    if (game_ini_line_exist(hud_sect, "ammo_divisor_up"))
+    {
+        finish_index = ceil(float(finish_index) / game_ini_r_int_def(hud_sect, "ammo_divisor_up", 1));
+    }
+    else if (game_ini_line_exist(hud_sect, "ammo_divisor_down"))
+    {
+        finish_index = floor(float(finish_index) / game_ini_r_int_def(hud_sect, "ammo_divisor_down", 1));
+    }
+
+    if (finish_index > limitator)
+    {
+        finish_index = limitator;
+    }
+
+    for (s32 i = start_index; i < finish_index; ++i)
+    {
+        SetWeaponModelBoneStatus(wpn, (prefix + inttostr(i)).c_str(), true);
+        if (length(prefix_hide) > 0)
+        {
+            SetWeaponModelBoneStatus(wpn, (prefix_hide + inttostr(i)).c_str(), false);
+        }
+    }
+    for (s32 i = finish_index + 1; i < limitator; ++i)
+    {
+        SetWeaponModelBoneStatus(wpn, (prefix + inttostr(i)).c_str(), false);
+        if (length(prefix_hide) > 0)
+        {
+            SetWeaponModelBoneStatus(wpn, (prefix_hide + inttostr(i)).c_str(), true);
+        }
+    }
+
+    if (length(prefix_var) > 0)
+    {
+        for (s32 i = start_index - 1; i < limitator; ++i)
+        {
+            SetWeaponModelBoneStatus(wpn, (prefix_var + inttostr(i)).c_str(), i == finish_index);
+        }
+    }
+}
+
 void HideOneUpgradeLevel(CWeapon* wpn, pcstr up_gr_section)
 {
     string all_subelements = game_ini_read_string(up_gr_section, "elements");
@@ -533,8 +714,8 @@ void CWeapon__ModUpdate(CWeapon* wpn)
     //Теперь отобразим установленный прицел
     ProcessScope(wpn);
     //Разберемся с визуализацией патронов
-    /*ProcessAmmo(wpn);
-    ProcessAmmoGL(wpn);
+    ProcessAmmo(wpn);
+    /*ProcessAmmoGL(wpn);
     //анимы от 3-го лица
     ReassignWorldAnims(wpn);
     //Визуализация режима огня

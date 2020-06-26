@@ -144,6 +144,9 @@ public:
     static void UpdateAddonsVisibility(CWeapon* wpn);
     static void InitAddons(CWeapon* wpn);
     static void SetWeaponParticle(CWeapon* wpn, pcstr particle_name, EGunsWeaponParticles particle_type);
+    static bool IsWeaponJammed(CWeapon* wpn);
+    static bool IsTriStateReload(CWeapon* wpn);
+    static bool GetAmmoTypeChangingStatus(CWeapon* wpn);
 
     // for CWeaponMagazined
     static void virtual_CWeaponMagazined__UnloadMagazine(CWeaponMagazined* wpn, bool spawn_ammo);

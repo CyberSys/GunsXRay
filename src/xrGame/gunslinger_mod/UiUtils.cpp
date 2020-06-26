@@ -23,7 +23,7 @@ bool IndicatorsShown()
     if (res)
     {
         CWeapon* wpn = dynamic_cast<CWeapon*>(GetActorActiveItem());
-        if (wpn != nullptr)
+        if (wpn == nullptr)
         {
             res = true;
         }

@@ -15,11 +15,11 @@ void ChangeParticles(CWeapon* wpn, pcstr name, EGunsWeaponParticles particle_typ
 
 void PlayAnimIdle(CHudItemObject* wpn) { EngineFriendWrapper::PlayAnimIdle(wpn); }
 
-bool IsScopeAttached(CWeapon* wpn) { return EngineFriendWrapper::GetAddonStatus(wpn, addonTypeScope); }
+bool IsScopeAttached(CWeapon* wpn) { return EngineFriendWrapper::IsAddonAttached(wpn, addonTypeScope); }
 
-bool IsSilencerAttached(CWeapon* wpn) { return EngineFriendWrapper::GetAddonStatus(wpn, addonTypeSilencer); }
+bool IsSilencerAttached(CWeapon* wpn) { return EngineFriendWrapper::IsAddonAttached(wpn, addonTypeSilencer); }
 
-bool IsGLAttached(CWeapon* wpn) { return EngineFriendWrapper::GetAddonStatus(wpn, addonTypeGL); }
+bool IsGLAttached(CWeapon* wpn) { return EngineFriendWrapper::IsAddonAttached(wpn, addonTypeGL); }
 
 bool IsGLEnabled(CWeapon* wpn)
 {
@@ -31,6 +31,8 @@ bool IsGLEnabled(CWeapon* wpn)
     }
     return res;
 }
+
+bool IsWeaponJammed(CWeapon* wpn) { return EngineFriendWrapper::IsWeaponJammed(wpn); }
 
 u32 GetInstalledUpgradesCount(CInventoryItem* itm) { return EngineFriendWrapper::GetInstalledUpgradesCount(itm); }
 pcstr GetInstalledUpgradeSection(CInventoryItem* itm, u32 index)
@@ -131,10 +133,6 @@ u32 GetAmmoInMagCount(CWeapon* wpn)
     if (wpn == nullptr)
         return result;
 
-    EGunsAddonStatus gl_status = GetGLStatus(wpn);
-    if ((gl_status == addonStatusDisabled) || ((gl_status == addonStatusAttachable) && !IsGLAttached(wpn)))
-        return result;
-
     if (IsGrenadeMode(wpn))
     {
         result = EngineFriendWrapper::GetAmmoInSecondVectorCount(static_cast<CWeaponMagazinedWGrenade*>(wpn));
@@ -178,6 +176,8 @@ bool IsAimNow(CHudItemObject* wpn)
 }
 
 float GetAimFactor(CWeapon* wpn) { return EngineFriendWrapper::GetZoomFactor(wpn); }
+
+bool IsTriStateReload(CWeapon* wpn) { return EngineFriendWrapper::IsTriStateReload(wpn); }
 
 EWeaponHudState GetCurrentState(CHudItemObject* wpn)
 {

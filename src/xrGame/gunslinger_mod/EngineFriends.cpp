@@ -19,6 +19,7 @@
 #include "Actor.h"
 #include "GamePersistent.h"
 #include "Include/xrRender/Kinematics.h"
+#include "WeaponShotgun.h"
 
 CALifeSimulator* alife();
 void CALifeSimulator__release(CALifeSimulator*, CSE_Abstract*, bool);
@@ -115,7 +116,7 @@ u16 EngineFriendWrapper::GetTargetSlot(CInventoryOwner* io) { return io->invento
 u16 EngineFriendWrapper::GetPreviousSlot(CInventoryOwner* io) { return io->inventory().GetPrevActiveSlot(); }
 CInventoryItem* EngineFriendWrapper::ItemFromSlot(CInventoryOwner* io, u16 slot)
 {
-    return io->inventory().ItemFromSlot(slot);
+    return (NO_ACTIVE_SLOT != slot) ? io->inventory().ItemFromSlot(slot) : nullptr;
 }
 void EngineFriendWrapper::SetTargetSlot(CInventoryOwner* io, u16 slot) { io->inventory().m_iNextActiveSlot = slot; }
 
@@ -219,6 +220,21 @@ void EngineFriendWrapper::SetWeaponParticle(CWeapon* wpn, pcstr particle_name, E
     case CWEAPON_SMOKE_PARTICLES: wpn->m_sSmokeParticles = particle_name; break;
     }
 }
+
+bool EngineFriendWrapper::IsWeaponJammed(CWeapon* wpn) { return wpn->IsMisfire(); }
+
+bool EngineFriendWrapper::IsTriStateReload(CWeapon* wpn)
+{
+    CWeaponShotgun* sg = dynamic_cast<CWeaponShotgun*>(wpn);
+    if (sg == nullptr)
+    {
+        return false;
+    }
+
+    return sg->IsTriStateReload();
+}
+
+bool EngineFriendWrapper::GetAmmoTypeChangingStatus(CWeapon* wpn) { return wpn->m_set_next_ammoType_on_reload; }
 
 // for CWeaponMagazined
 void EngineFriendWrapper::virtual_CWeaponMagazined__UnloadMagazine(CWeaponMagazined* wpn, bool spawn_ammo)
